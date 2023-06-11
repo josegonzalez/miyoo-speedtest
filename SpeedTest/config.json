@@ -1,0 +1,7 @@
+{
+  "label":       "Speed Test",
+  "icon":        "../../Icons/Default/app/clock.png",
+  "iconsel":     "",
+  "launch":      "launch.sh",
+  "description": "Run an internet speed test"
+}
