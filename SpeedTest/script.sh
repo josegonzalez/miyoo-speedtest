@@ -1,4 +1,5 @@
 #!/bin/sh
+export LD_LIBRARY_PATH="/mnt/SDCARD/.tmp_update/lib:/config/lib:/lib"
 
 dotest() {
   # $1 is which file to grab 100, 10, or 1 (megabytes).
@@ -6,7 +7,7 @@ dotest() {
 
   wget=$(whichwget)
 
-  bloburl=http://cachefly.cachefly.net/${megabytes}mb.test
+  bloburl=https://github.com/josegonzalez/miyoo-speedtest/releases/download/0.0.1/${megabytes}mb.test
   blobsize=$(($megabytes * 1024 * 1024))
 
   if which time >/dev/null 2>/dev/null; then
