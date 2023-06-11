@@ -2,12 +2,13 @@
 export LD_LIBRARY_PATH="/mnt/SDCARD/.tmp_update/lib:/config/lib:/lib"
 
 dotest() {
+  download_url_prefix="$1"
   # $1 is which file to grab 100, 10, or 1 (megabytes).
-  megabytes=$1
+  megabytes="$2"
 
   wget=$(whichwget)
 
-  bloburl=https://github.com/josegonzalez/miyoo-speedtest/releases/download/0.0.1/${megabytes}mb.test
+  bloburl="${download_url_prefix}/${megabytes}mb.test"
   blobsize=$(($megabytes * 1024 * 1024))
 
   if which time >/dev/null 2>/dev/null; then
@@ -139,9 +140,15 @@ whichwget() {
   echo wget $options
 }
 
-echo "======================================================================"
-echo "ROUGH APPROXIMATION"
-dotest 1
-echo "======================================================================"
+echo "====================================================="
+echo "Cachefly Speed Test (1mb)"
+dotest "http://cachefly.cachefly.net" 1
+echo "====================================================="
+echo "Sleeping for 5 seconds before next speed test"
+sleep 5
+echo "====================================================="
+echo "OTA Speed Test (1mb)"
+dotest "https://github.com/josegonzalez/miyoo-speedtest/releases/download/0.0.1" 1
+echo "====================================================="
 
 sleep 15
